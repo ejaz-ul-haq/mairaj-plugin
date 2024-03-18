@@ -15,6 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Debug FTP_PORT
+        run: echo "FTP_PORT: ${{ secrets.FTP_PORT }}"
+
       - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
@@ -24,4 +27,5 @@ jobs:
           local_path: './*'
           remote_path: '/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin'
           sftp_only: false
+          delete_remote_files: true
           password: ${{ secrets.FTP_PASSWORD }}
