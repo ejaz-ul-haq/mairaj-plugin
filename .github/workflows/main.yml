@@ -1,0 +1,27 @@
+name: Auto-deploy-to-dreamhost-development
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events but only for the main branch
+  push:
+    branches: 
+      - main
+
+jobs:
+  deploy_to_dreamhost_sftp:
+    runs-on: ubuntu-latest
+    name: Deploy To Dreamhost sFTP
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local_path: './*'
+          remote_path: '/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin'
+          sftp_only: true
+          delete_remote_files: true
+          password: ${{ secrets.FTP_PASSWORD }}
