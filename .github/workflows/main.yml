@@ -26,6 +26,6 @@ jobs:
       - name: Deploy Plugin to DreamHost
         run: |
           ssh -o StrictHostKeyChecking=no -A mairaj_wp_wpvisions@iad1-shared-e1-11.dreamhost.com << 'ENDSSH'
-            cd ~/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin
+            cd ~/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin
             git pull origin main
           ENDSSH
