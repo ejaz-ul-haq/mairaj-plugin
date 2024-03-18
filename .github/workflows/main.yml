@@ -8,18 +8,24 @@ on:
       - main
 
 jobs:
-  deploy_to_dreamhost_sftp:
+  deploy:
     runs-on: ubuntu-latest
-    name: Deploy To Dreamhost sFTP
+
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Deploy file
-        uses: whattheearl/sftp-deploy-action@v2
+      - name: Install SSH Client
+        run: sudo apt-get update && sudo apt-get install -y openssh-client
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local_path: './*'
-          remote_path: '/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin'
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: Deploy Plugin to DreamHost
+        run: |
+          ssh -o StrictHostKeyChecking=no -A user@server.dreamhost.com << 'ENDSSH'
+            cd ~/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin
+            git pull origin main
+          ENDSSH
