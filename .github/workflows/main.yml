@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - run: mkdir ~/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin
+      - run: chmod 600 ~/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin  
       - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
