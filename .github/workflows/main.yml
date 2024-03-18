@@ -22,7 +22,7 @@ jobs:
           port: ${{ secrets.FTP_PORT }}
           local_path: './*'
           remote_path: '/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin'
-          sftp_only: true
+          sftp_only: false
           delete_remote_files: true
           password: ${{ secrets.FTP_PASSWORD }}
           mkdir: true
