@@ -14,16 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        uses: whattheearl/sftp-deploy-action@v2
         with:
-          username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
-          port: '22'
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
           local_path: './*'
           remote_path: '/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin'
-          sftp_only: false
-          delete_remote_files: false
-          password: ${{ secrets.FTP_PASSWORD }}
-          mkdir: true
-          chmod: '600'
