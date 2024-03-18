@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       Mairaj Plugin
  * Plugin URI:        https://wpinnovators.com/downloads/mp-01/
- * Description:       This Plugin is used for WP practices 02.
+ * Description:       This Plugin is used for WP practices 03.
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2
