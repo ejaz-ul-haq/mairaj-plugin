@@ -18,11 +18,11 @@ jobs:
       - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: mairaj_wp_wpvisions
           server: iad1-shared-e1-11.dreamhost.com
           port: 22
+          username: mairaj_wp_wpvisions
+          password: ftp@mairaj@2024
           local_path: './*'
           remote_path: '/home/mairaj_wp_wpvisions/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin'
           sftp_only: false
           delete_remote_files: true
-          password: ftp@mairaj@2024
