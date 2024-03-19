@@ -23,14 +23,5 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Discard Local Changes
-        run: |
-          git reset --hard HEAD
-          git clean -df
-
-      - name: Deploy Plugin to DreamHost
-        run: |
-          ssh -o StrictHostKeyChecking=no -A mairaj_wp_wpvisions@iad1-shared-e1-11.dreamhost.com << 'ENDSSH'
-            cd ~/mairaj.wp.wpvisions.com/wp-content/plugins/mairaj-plugin
-            git pull origin main
-          ENDSSH
+      - name: Copy Plugin Folder to DreamHost
+        run: scp -r ./mairaj-plugin mairaj_wp_wpvisions@iad1-shared-e1-11.dreamhost.com:~/mairaj.wp.wpvisions.com/wp-content/plugins/
