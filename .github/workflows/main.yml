@@ -22,10 +22,16 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-      
+
       - name: Check for Local Changes
         run: |
-          git diff --exit-code || { echo "Local changes detected, committing changes..."; git add .; git commit -m "Committing local changes"; }
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Local changes detected, committing changes..."
+            git add .
+            git commit -m "Committing local changes"
+          else
+            echo "No local changes detected."
+          fi
       
       - name: Deploy Plugin to DreamHost
         run: |
